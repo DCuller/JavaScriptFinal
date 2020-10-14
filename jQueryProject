@@ -18,10 +18,12 @@
 	<script>
 	$(document).ready(function() {
 		// tabs
-		$("#divTabs")
+		$("#divTabs").tabs({
+               event:"mouseover"
+            });
 		
 		// accordian
-		$("#divAccordion")
+		$("#divAccordion").accordion();
 		
 		// auto complete
 		var availableTags = [
@@ -48,22 +50,45 @@
 			"Scala",
 			"Scheme"
 		];
-		$("#tags")
+		$("#tags").autocomplete({  
+      source: availableTags  
+	  });
 		
 		// date picker
-		$('#demoDate')
+		$('#demoDate').datepicker({
+				showOn: "both",
+                buttonImage: "img/calender.png",
+                buttonImageOnly: true,
+				minDate:"d",
+				maxDate:"+30d"
+		});
 		
-		// spinner
-		$( "#spinner" )
+		// spinner			
+		$( "#spinner" ).spinner({
+               step: 25,
+               min: 25, 
+               max: 500,
+			   readonly:true
+            });
 		
-		// slider
-		$('#divSlider')
+		// slider		
+		$('#divSlider').slider({
+                values: [25, 75],
+                range: true,
+                create: showSlider,
+				slide: function( event, ui ) {
+					$( "#lowerLimit" ).html( ui.values[ 0 ]);
+					$( "#upperLimit" ).html( ui.values[ 1 ]);
+				  }
+			 
+            });
 		
-		function showSlider() {
-			$('#lowerLimit').text($('#divSlider').slider("values", 0));
-			$('#upperLimit').text($('#divSlider').slider("values", 1));
+		
+		 function showSlider() {
+			$("#lowerLimit").text($('#divSlider').slider("values", 0));
+			$("#upperLimit").text($('#divSlider').slider("values", 1));
 		}
-		
+				
 	});
     </script> 
 </head> 
